@@ -9,7 +9,6 @@ A simple web-based Todo List application built using Node.js, Express, and Mongo
 - [Installation](#installation)
 - [Usage](#usage)
 - [Creating a Custom Todo List](#creating-a-custom-todo-list)
-- [Screenshots](#screenshots)
 - [Contributing](#contributing)
 - [License](#license)
 - [Credits](#credits)
