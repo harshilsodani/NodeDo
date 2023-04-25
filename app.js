@@ -98,6 +98,10 @@ app.post("/", async function (req, res) {
   const itemName = req.body.newItem;
   const listName = req.body.list;
 
+  if (!itemName) {
+    return res.status(400), send("Item name is required");
+  }
+
   const item = new Item({
     name: itemName,
   });
