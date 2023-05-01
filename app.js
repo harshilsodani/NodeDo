@@ -20,12 +20,17 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
 mongoose.connect(
-  "mongodb+srv://"+username+":"+password+"@cluster0.6dluecf.mongodb.net/todoListDB",
+  "mongodb+srv://" +
+    username +
+    ":" +
+    password +
+    "@cluster0.6dluecf.mongodb.net/todoListDB",
   { useNewUrlParser: true, useUnifiedTopology: true }
 );
 
 // mongoose.connect("mongodb://127.0.0.1:27017/todolistDB", {
 //   useNewURLParser: true,
+//   useUnifiedTopology: true,
 // });
 
 const itemSchema = new mongoose.Schema({
@@ -125,6 +130,31 @@ app.get("/:customListName", async function (req, res) {
   }
 });
 
+app.post("/newList", async function (req, res) {
+  const customListName = req.body.newListName;
+
+  try {
+    const foundList = await List.findOne({ name: customListName });
+    if (!foundList) {
+      // create a new list
+      const list = new List({
+        name: customListName,
+        items: defaultItems,
+      });
+
+      await list.save();
+      res.redirect("/" + customListName);
+    } else {
+      res.render("list", {
+        listTitle: foundList.name,
+        newListItems: foundList.items,
+      });
+    }
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 /* This code defines a route for handling form submissions when a user adds a new item to the to-do
 list. It uses the HTTP POST method and listens for requests to the root URL ("/"). When a POST
 request is made, it retrieves the values of the "newItem" and "list" fields from the request body
@@ -202,5 +232,5 @@ app.get("/about", function (req, res) {
 });
 
 app.listen(PORT, function () {
-  console.log("Server started on port ${PORT}");
+  console.log("Server started on port ", PORT);
 });
