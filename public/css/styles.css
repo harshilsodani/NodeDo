@@ -95,13 +95,3 @@ footer {
   text-align: center;
 }
 
-@media (max-width: 991px) {
-  .box {
-    zoom: 2;
-    -moz-transform: scale(2);
-  }
-  footer {
-    zoom: 2;
-    -moz-transform: scale(2);
-  }
-}
