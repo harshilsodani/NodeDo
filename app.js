@@ -8,6 +8,9 @@ const express = require("express");
 const ejs = require("ejs");
 const mongoose = require("mongoose");
 const _ = require("lodash");
+const PORT = process.env.PORT || 3000;
+const username = process.env.USERNAME;
+const password = process.env.PASSWORD;
 
 const app = express();
 
@@ -16,9 +19,14 @@ app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
-mongoose.connect("mongodb://127.0.0.1:27017/todolistDB", {
-  useNewURLParser: true,
-});
+mongoose.connect(
+  "mongodb+srv://"+username+":"+password+"@cluster0.6dluecf.mongodb.net/todoListDB",
+  { useNewUrlParser: true, useUnifiedTopology: true }
+);
+
+// mongoose.connect("mongodb://127.0.0.1:27017/todolistDB", {
+//   useNewURLParser: true,
+// });
 
 const itemSchema = new mongoose.Schema({
   name: { type: String, required: [true] },
@@ -193,6 +201,6 @@ app.get("/about", function (req, res) {
   res.render("about");
 });
 
-app.listen(3000, function () {
-  console.log("Server started on port 3000");
+app.listen(PORT, function () {
+  console.log("Server started on port ${PORT}");
 });
