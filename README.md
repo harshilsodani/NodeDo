@@ -1,4 +1,4 @@
-# Todo List with Database
+# NodeDo: Easy Task Manager
 
 A simple web-based Todo List application built using Node.js, Express, and MongoDB with EJS templates. It has a basic layout userinteface designed using CSS. 
 
