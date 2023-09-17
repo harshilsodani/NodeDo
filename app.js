@@ -28,7 +28,7 @@ mongoose.connect(
   { useNewUrlParser: true, useUnifiedTopology: true }
 );
 
-// mongoose.connect("mongodb://127.0.0.1:27017/todolistDB", {
+// mongoose.connect("mongodb://127.0.0.1:27017/blogDB", {
 //   useNewURLParser: true,
 //   useUnifiedTopology: true,
 // });
@@ -82,7 +82,7 @@ app.get("/", async function (req, res) {
 
       res.redirect("/");
     } else {
-      console.log(foundItems);
+      // console.log(foundItems);
       res.render("list", { listTitle: "Today", newListItems: foundItems });
     }
   } catch (err) {
